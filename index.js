@@ -1,20 +1,20 @@
 import { Cliente } from './Cliente.js'
-import { ContaCorrente } from './ContaCorrente.js'
-import { ContaPoupanca } from './ContaPoupanca.js'
-import { Conta } from './Conta.js'
-import { ContaSalario } from './ContaSalario.js'
+import { Gerente } from './Funcionários/Gerente.js'
+import { Diretor } from './Funcionários/Diretor.js'
+import { SistemaDeAutenticacao } from './SistemaDeAutenticacao.js'
 
-const cliente1 = new Cliente('Vinicius', 11122233309)
+const diretor = new Diretor('Vinicius', 10000, 123456789)
+diretor.cadastrarSenha('123456')
 
-const contaCorrenteVinicius = new ContaCorrente(cliente1, 1001)
-const contaPoupanca = new ContaPoupanca(50, cliente1, 1001)
+const gerente = new Gerente('Ricardo', 5000, 1234568722)
+gerente.cadastrarSenha('123')
 
-const conta = new ContaSalario(cliente1, 1001)
+const cliente = new Cliente('Joao', 33344455567, '998877')
 
-conta.depositar(200)
+const gerenteEstaLogado = SistemaDeAutenticacao.login(gerente, '123')
 
-conta.sacar(100)
+const diretorEstaLogado = SistemaDeAutenticacao.login(diretor, '123456')
 
-console.log(conta)
-// const conta = new Conta(0, cliente1, 1001) GERA UM ERRO POR NÃO PODER INSTANCIAR ESSA CLASSE DIRETAMENTE
-// console.log(conta)
+const clienteEstaLogado = SistemaDeAutenticacao.login(cliente, '998877')
+
+console.log(gerenteEstaLogado, diretorEstaLogado, clienteEstaLogado)
